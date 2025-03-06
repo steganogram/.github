@@ -13,11 +13,6 @@ on:
       CODECOV_TOKEN:
         required: true
 
-env:
-  CARGO_INCREMENTAL: 0
-  SCCACHE_GHA_ENABLED: "true"
-  RUSTC_WRAPPER: "sccache"
-
 jobs:
   coverage:
     name: code coverage
@@ -25,13 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: setup | rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: sassman/.github/.github/actions/rust-toolchain
         with:
-          toolchain: nightly
-          default: true
-          profile: minimal
-          components: clippy, rustfmt
-      - uses: mozilla-actions/sccache-action@v0.0.7
+          channel: nightly
       - name: Install cargo-llvm-cov
         uses: taiki-e/install-action@cargo-llvm-cov
       - name: Generate code coverage

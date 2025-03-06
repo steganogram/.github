@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: setup | rust
-        uses: ./actions/rust-toolchain
+        uses: sassman/.github/.github/actions/rust-toolchain
       - run: cargo check
 
   lint:
@@ -34,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: setup | rust
-        uses: ./actions/rust-toolchain
+        uses: sassman/.github/.github/rust-toolchain
       - run: cargo ${{ matrix['cargo-cmd'] }}
 
   tests:
@@ -49,7 +49,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: setup | rust
-        uses: ./actions/rust-toolchain
+        uses: sassman/.github/.github/actions/rust-toolchain
         with:
           channel: ${{ matrix.channel }}
           default: true
@@ -63,7 +63,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: setup | rust
-        uses: ./actions/rust-toolchain
+        uses: sassman/.github/.github/actions/rust-toolchain
       - uses: taiki-e/install-action@v2
         with:
           tool: cargo-deny
