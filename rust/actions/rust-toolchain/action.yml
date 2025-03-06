@@ -1,0 +1,32 @@
+name: Setup Rust toolchain
+description: Sets up a Rust toolchain for use in subsequent steps.
+
+inputs:
+  channel:
+    description: "The Rust channel to install."
+    required: false
+    default: "stable"
+  use-cache:
+    description: "Whether to use the cache for the toolchain installation."
+    required: false
+    default: "true"
+
+runs:
+  using: "composite"
+  steps:
+    - name: setup | rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        default: true
+        profile: minimal
+        components: clippy, rustfmt
+        toolchain: ${{ inputs.channel }}
+    - name: setup cache
+      if: ${{ inputs.use-cache == 'true' }}
+      uses: mozilla-actions/sccache-action@0.0.7
+    - name: setup environment
+      shell: bash
+      if: ${{ inputs.use-cache == 'true' }}
+      run: |
+        echo "SCCACHE_GHA_ENABLED=true" >> $GITHUB_ENV
+        echo "RUSTC_WRAPPER=sccache" >> $GITHUB_ENV
