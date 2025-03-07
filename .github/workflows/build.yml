@@ -55,12 +55,21 @@ jobs:
           default: true
           profile: minimal
       - name: cargo test
+        if: ${{ matrix.os != 'windows-latest' }}
         run: |
           if [ -f "Cargo.lock" ]; then
             cargo test --all --locked
           else
             cargo test --all
           fi
+      - name: cargo test
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: |
+          if exist Cargo.lock (
+            cargo test --all --locked
+          ) else (
+            cargo test --all
+          )
 
   audit:
     name: security audit
