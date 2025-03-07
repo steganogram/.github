@@ -65,11 +65,12 @@ jobs:
       - name: cargo test
         if: matrix.os == 'windows-latest'
         run: |
-          if exist Cargo.lock (
+          # Windows PowerShell is a disaster
+          if (Test-Path "Cargo.lock") {
             cargo test --all --locked
-          ) else (
+          } else {
             cargo test --all
-          )
+          }
 
   audit:
     name: security audit
