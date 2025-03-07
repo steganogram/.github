@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: setup | rust
-        uses: sassman/.github/.github/actions/rust-toolchain
+        uses: sassman/.github/.github/actions/rust-toolchain@main
         with:
           channel: nightly
       - name: Install cargo-llvm-cov
