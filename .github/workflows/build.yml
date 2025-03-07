@@ -55,7 +55,12 @@ jobs:
           default: true
           profile: minimal
       - name: cargo test
-        run: cargo test --all --locked
+        run: |
+          if [ -f "Cargo.lock" ]; then
+            cargo test --all --locked
+          else
+            cargo test --all
+          fi
 
   audit:
     name: security audit
