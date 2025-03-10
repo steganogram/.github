@@ -1,0 +1,19 @@
+name: Publish dry run
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: [main]
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  publish-dry-run:
+    name: publish dry run
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: setup | rust
+        uses: sassman/.github/.github/actions/rust-toolchain@main
+      - run: cargo publish --dry-run
