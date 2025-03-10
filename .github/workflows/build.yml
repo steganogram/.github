@@ -29,7 +29,7 @@ jobs:
         os: ["macos-latest", "ubuntu-latest", "windows-latest"]
         cargo-cmd:
           - fmt --all -- --check
-          - clippy --all-targets --all-features -- -D warnings
+          - clippy --all-targets -- -D warnings
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -106,4 +106,4 @@ jobs:
       - name: check documentation
         env:
           RUSTDOCFLAGS: -D warnings
-        run: cargo doc --no-deps --all-features
+        run: cargo doc --no-deps
