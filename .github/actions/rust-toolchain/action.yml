@@ -23,7 +23,7 @@ runs:
         toolchain: ${{ inputs.channel }}
     - name: setup cache
       if: ${{ inputs.use-cache == 'true' }}
-      uses: mozilla-actions/sccache-action@v0.0.7
+      uses: mozilla-actions/sccache-action@v0.0.8
     - name: setup environment
       shell: bash
       if: ${{ inputs.use-cache == 'true' }}
